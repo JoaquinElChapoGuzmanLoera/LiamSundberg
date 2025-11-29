@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Chapo – Profile Summary</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background: #f4f4f4;
+      margin: 0;
+      color: #111;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 24px 32px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .headline {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .subheadline {
+      font-size: 1.2em;
+      color: #555;
+      margin-bottom: 12px;
+    }
+    .byline {
+      font-size: 0.9em;
+      color: #888;
+      margin-bottom: 20px;
+    }
+    .content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+    .article-body p {
+      margin-bottom: 12px;
+    }
+    .sidebar {
+      background: #f9f9f9;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 0.9em;
+    }
+    .sidebar h3 {
+      margin-top: 0;
+      font-size: 1em;
+      color: #333;
+    }
+    .timeline {
+      list-style: none;
+      padding-left: 0;
+    }
+    .timeline li {
+      margin-bottom: 8px;
+      padding-left: 12px;
+      position: relative;
+    }
+    .timeline li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #2b6cb0;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.85em;
+      color: #666;
+      border-top: 1px solid #ddd;
+      padding-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    const articleData = {
+      headline: "El Chapo: From Rural Beginnings to Infamous Drug Lord",
+      subheadline: "The rise, crimes and downfall of Joaquín Guzmán, leader of the Sinaloa Cartel.",
+      byline: "By Liam Sundberg — October 13, 2025",
+      paragraphs: [
+        "Joaquín “El Chapo” Guzmán Loera — born in a poor farming region of Sinaloa, Mexico — rose from humble roots to become one of the world’s most notorious drug traffickers. Over decades, he built the Sinaloa Cartel into a global narcotics empire that smuggled cocaine, heroin, methamphetamine and marijuana into the United States and beyond. :contentReference",
+        "Under his leadership, the cartel pioneered smuggling methods including hidden tunnels, clandestine shipments and complex trafficking networks. This allowed the cartel to supply massive quantities of illicit drugs — making Guzmán one of the most powerful and wealthy criminals of his time. :contentReference",
+        "Despite multiple arrests — and dramatic escapes from maximum‑security prisons — Guzmán evaded capture for years. His most famous escape was in 2015 via a tunnel from a Mexican prison, but after a 2016 recapture and extradition to the United States, he faced a sweeping federal trial in New York. :contentReference",
+        "In 2019, a federal jury found him guilty of drug trafficking, money laundering, weapons charges and participating in a continuing criminal enterprise. He was sentenced to life in prison plus 30 years, and ordered to forfeit over \$12.6 billion. :contentReference"
+      ],
+      timeline: [
+        "1954/1957: Born in rural Sinaloa, Mexico. :contentReference",
+        "1980s: Becomes a major figure in drug trafficking, helps found the Sinaloa Cartel. :contentReference",
+        "1993: First arrest in Guatemala; extradited to Mexico and imprisoned. :contentReference",
+        "2001: First escape from Mexican prison, reportedly via laundry cart. :contentReference",
+        "2014: Recaptured by Mexican authorities in Mazatlán after years on the run. :contentReference",
+        "July 2015: Escapes again through a tunnel beneath the prison shower. :contentReference",
+        "January 8, 2016: Recaptured during a joint U.S.–Mexican operation. :contentReference",
+        "February 12, 2019: Convicted in a U.S. federal court on multiple charges. :contentReference",
+        "July 17, 2019: Sentenced to life in prison plus 30 years and ordered to forfeit \$12.6 billion. :contentReference"
+      ],
+      sidebar: {
+        heading: "Quick Facts",
+        items: [
+          "Full name: Joaquín Archivaldo Guzmán Loera",
+          "Aliases: “El Chapo”, “El Rapido”",
+          "Criminal enterprise: Leader of Sinaloa Cartel",
+          "Sentence: Life + 30 years (sentenced July 2019) :contentReference",
+          "Criminal charges: Drug trafficking, money laundering, weapons, conspiracy :contentReference"
+        ]
+      },
+    
+    };
+
+    function buildPage(data) {
+      const root = document.getElementById('root');
+      const container = document.createElement('div');
+      container.className = 'container';
+
+      const headline = document.createElement('div');
+      headline.className = 'headline';
+      headline.textContent = data.headline;
+      container.appendChild(headline);
+
+      const subheadline = document.createElement('div');
+      subheadline.className = 'subheadline';
+      subheadline.textContent = data.subheadline;
+      container.appendChild(subheadline);
+
+      const byline = document.createElement('div');
+      byline.className = 'byline';
+      byline.textContent = data.byline;
+      container.appendChild(byline);
+
+      const content = document.createElement('div');
+      content.className = 'content';
+
+      const articleBody = document.createElement('div');
+      articleBody.className = 'article-body';
+      data.paragraphs.forEach(pText => {
+        const p = document.createElement('p');
+        p.textContent = pText;
+        articleBody.appendChild(p);
+      });
+
+      const timelineDiv = document.createElement('div');
+      const tHeading = document.createElement('h3');
+      tHeading.textContent = "Timeline";
+      timelineDiv.appendChild(tHeading);
+      const tList = document.createElement('ul');
+      tList.className = 'timeline';
+      data.timeline.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        tList.appendChild(li);
+      });
+      timelineDiv.appendChild(tList);
+      articleBody.appendChild(timelineDiv);
+
+      content.appendChild(articleBody);
+
+      const sidebar = document.createElement('div');
+      sidebar.className = 'sidebar';
+      const sbHeading = document.createElement('h3');
+      sbHeading.textContent = data.sidebar.heading;
+      sidebar.appendChild(sbHeading);
+      const sbList = document.createElement('ul');
+      data.sidebar.items.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        sbList.appendChild(li);
+      });
+      sidebar.appendChild(sbList);
+      content.appendChild(sidebar);
+
+      container.appendChild(content);
+
+      const footer = document.createElement('footer');
+      footer.textContent = data.footer;
+      container.appendChild(footer);
+
+      root.appendChild(container);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => buildPage(articleData));
+  </script>
+</body>
+</html>
